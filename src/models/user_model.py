@@ -1,4 +1,4 @@
-from src import db
+from src.databases.conection import db
 
 class User(db.Model):
     __tablename__ = 'users'

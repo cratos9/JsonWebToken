@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from utils.jwt import write_token, validate_token
-from services.users import new_user, validate_user
+from src.utils.jwt import write_token, validate_token
+from src.services.users import new_user, validate_user
 
 bp = Blueprint('authentication_user', __name__, url_prefix='/api/v1/auth_user')
 

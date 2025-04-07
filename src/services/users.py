@@ -1,12 +1,12 @@
-from models.user_model import UserModel
+from src.models.user_model import User
 from werkzeug.security import generate_password_hash, check_password_hash
-from utils.jwt import write_token
+from src.utils.jwt import write_token
 from src import db
 
 
 def new_user(username, password):
     
-    user_exists = UserModel.query.filter_by(username=username).first()
+    user_exists = User.query.filter_by(username=username).first()
     if user_exists:
         return {"message": "User already exists"}, 409
     
@@ -16,7 +16,7 @@ def new_user(username, password):
     }
     token = write_token(data)
     
-    user = UserModel(username=username, password=generate_password_hash(password), token=token)
+    user = User(username=username, password=generate_password_hash(password), token=token)
     
     try:
         db.session.add(user)
@@ -27,7 +27,7 @@ def new_user(username, password):
     
 def validate_user(username, password):
     
-    user = UserModel.query.filter_by(username=username).first()
+    user = User.query.filter_by(username=username).first()
     
     if not user:
         return {"message": "User not found"}, 404
