@@ -32,4 +32,10 @@ def login():
 
 @bp.route('/register', methods=['POST'])
 def register():
-    pass
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+    
+    new_user_response = new_user(username, password)
+    
+    return jsonify({"message": new_user_response.message}), new_user_response.status_code

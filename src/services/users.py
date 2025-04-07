@@ -1,7 +1,6 @@
 from models.user_model import UserModel
 from werkzeug.security import generate_password_hash, check_password_hash
-from utils.jwt import write_token, validate_token
-from flask import jsonify
+from utils.jwt import write_token
 from src import db
 
 
@@ -22,6 +21,7 @@ def new_user(username, password):
     try:
         db.session.add(user)
         db.session.commit()
+        return {"message": "User created successfully"}, 201
     except Exception as e:
         return {"message": "Error creating user"}, 500
     
