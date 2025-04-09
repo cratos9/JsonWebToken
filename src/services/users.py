@@ -35,4 +35,4 @@ def validate_user(username, password):
     if not check_password_hash(user.password, password):
         return {"message": "Invalid password"}, 401
     
-    return {"message": "User authenticated"}, 200
+    return {"message": "User authenticated", "token": user.token }, 200
