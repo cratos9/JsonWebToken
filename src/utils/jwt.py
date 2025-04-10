@@ -23,9 +23,9 @@ def validate_token(token, output=False):
     try:
         decoded = decode(token, os.getenv("SECRET_KEY"), algorithms=["HS256"])
         if output:
-            return {"message": "Token valid", "decoded": decoded}, 200
-        return {"message": "Token valid"}, 200
+            return {"message": "Token valid", "decoded": decoded}
+        return {"message": "Token valid"}
     except exceptions.ExpiredSignatureError:
-        return {"message": "Token expired"}, 401
+        return {"message": "Token expired"}
     except exceptions.DecodeError:
-        return {"message": "Token invalid"}, 401
+        return {"message": "Token invalid"}

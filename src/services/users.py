@@ -30,9 +30,9 @@ def validate_user(username, password):
     user = User.query.filter_by(username=username).first()
     
     if not user:
-        return {"message": "User not found"}, 404
+        return {"message": "User not found"}
     
     if not check_password_hash(user.password, password):
-        return {"message": "Invalid password"}, 401
+        return {"message": "Invalid password"}
     
-    return {"message": "User authenticated", "token": user.token }, 200
+    return {"message": "User authenticated", "token": user.token }
